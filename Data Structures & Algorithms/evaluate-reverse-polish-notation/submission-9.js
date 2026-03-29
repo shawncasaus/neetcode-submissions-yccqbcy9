@@ -1,0 +1,35 @@
+class Solution {
+    /**
+     * @param {string[]} tokens
+     * @return {number}
+     */
+    evalRPN(tokens) {
+        let operands = new Set(['+', '-', '*', '/'])
+        let stack = []
+        for (let i = 0; i < tokens.length; i++) {
+            console.log(stack)
+            if (operands.has(tokens[i])) {
+                console.log(tokens[i])
+                let num1 = parseInt(stack.pop(), 10)
+                let num2 = parseInt(stack.pop(), 10)
+                switch(tokens[i]) {
+                    case '+':
+                        stack.push(num2 + num1)
+                        break;
+                    case '-':
+                        stack.push(num2 - num1)
+                        break;
+                    case '*':
+                        stack.push(num2 * num1)
+                        break;
+                    case '/':
+                        stack.push(Math.trunc(num2 / num1))
+                        break;
+                }
+            } else {
+                stack.push(tokens[i])
+            }
+        }
+        return stack.pop()
+    }
+}
